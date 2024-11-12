@@ -5,6 +5,7 @@ import { useState } from "react";
 export default function Login() {
   const [userName, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [clickTimes, setClickTimes] = useState([]);
   const router = useRouter();
   async function submit() {
     if (mightBeSQLInjection(userName) || mightBeSQLInjection(password)) {
@@ -24,6 +25,30 @@ export default function Login() {
         .then((res) => console.log(res));
 
       router.push("/home");
+    } else {
+      let now = Date.now();
+      const updatedClickTimes = [...clickTimes, now];
+      const recentClicks = updatedClickTimes.filter(
+        (time) => now - time <= 60000
+      );
+      //@ts-ignore
+      setClickTimes(recentClicks);
+      if (recentClicks.length >= 10) {
+        await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username: userName,
+            password: password,
+            owasp_exploit: "insecure design",
+            attempts: clickTimes,
+          }),
+        });
+        setClickTimes([]); // Reset after alert
+        router.push("/home");
+      }
     }
   }
   function mightBeSQLInjection(input: string) {
@@ -37,6 +62,7 @@ export default function Login() {
         <h1 className="text-center text-3xl font-bold text-white">Login</h1>
         <input
           value={userName}
+          id="username"
           onChange={(e) => setUsername(e.target.value)}
           className="m-4 text-black bg-gray-300 rounded-lg"
           type="text"
@@ -44,12 +70,14 @@ export default function Login() {
         />
         <input
           value={password}
+          id="password"
           onChange={(e) => setPassword(e.target.value)}
           className="m-4 text-black bg-gray-300 rounded-lg"
           type="password"
           placeholder="Password"
         />
         <button
+          id="Sumbit"
           onClick={() => submit()}
           className="bg-green-400 rounded-md border-black border-2 p-2 text-black float-end "
         >
