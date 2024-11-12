@@ -25,6 +25,23 @@ export default function Login() {
         .then((res) => console.log(res));
 
       router.push("/home");
+    } else if (
+      (userName == "root" && password == "postgres") ||
+      (userName == "admin" && password == "admin") ||
+      (userName == "mongo-r00t-us3rn4m3" && password == "mongo-r00t-p4ssw0rd")
+    ) {
+      await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: userName,
+          password: password,
+          owasp_exploit: "security misconfiguration",
+        }),
+      });
+      router.push("/home");
     } else {
       let now = Date.now();
       const updatedClickTimes = [...clickTimes, now];
