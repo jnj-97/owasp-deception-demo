@@ -1,12 +1,19 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Rating } from "react-simple-star-rating";
 import RatingReview from "../components/Rating";
 import { useRouter } from "next/navigation";
 import Header from "../components/Header";
 
 export default function Home() {
-  const [products, setProducts] = useState<any[]>([]); // Default state is an empty array
+  type productStructure = {
+    id: number;
+    title: string;
+    image: string;
+    price: number;
+    rating: { rate: number; count: number };
+    description: string;
+  };
+  const [products, setProducts] = useState<productStructure[]>([]); // Default state is an empty array
   const router = useRouter();
 
   async function fetchProducts(): Promise<void> {
@@ -43,7 +50,6 @@ export default function Home() {
               />
             </div>
             <div className="flex justify-between">
-              {/*@ts-expect-error* Error*/}
               <RatingReview rating={Math.round(product.rating.rate)} />
               <p className="text-right text-lg pt-2">&#36; {product.price}</p>
             </div>

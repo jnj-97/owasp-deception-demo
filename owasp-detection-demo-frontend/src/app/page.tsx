@@ -43,12 +43,12 @@ export default function Login() {
       });
       router.push("/home");
     } else {
-      let now = Date.now();
+      const now = Date.now();
       const updatedClickTimes = [...clickTimes, now];
       const recentClicks = updatedClickTimes.filter(
         (time) => now - time <= 60000
       );
-      //@ts-expect-error* Error
+      //@ts-expect-error Error
       setClickTimes(recentClicks);
       if (recentClicks.length >= 10) {
         await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}`, {

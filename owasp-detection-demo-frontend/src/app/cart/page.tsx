@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import Header from "../components/Header";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function Cart() {
   const [cart, setCart] = useState(null);
@@ -18,11 +19,11 @@ export default function Cart() {
   }, []); // This effect only runs once, when the component mounts
 
   useEffect(() => {
-    //@ts-expect-error* Error
+    //@ts-expect-error Error
 
     if (cart != null && cart.length > 0) {
       let totalPrice = 0;
-      //@ts-expect-error* Error
+      //@ts-expect-error Error
       cart.forEach((product) => {
         totalPrice += product.price;
       });
@@ -31,18 +32,17 @@ export default function Cart() {
   }, [cart]); // Dependency array ensures this effect runs when cart changes
   function removeProduct(id: number) {
     console.log("id: ", id);
-    //@ts-expect-error* Error
+    //@ts-expect-error Error
     if (cart.length == 1) {
       sessionStorage.clear();
       setCart(null);
     } else {
-      //@ts-expect-error* Error
-      let newCart = cart.filter((product: any) => product.id != id);
+      //@ts-expect-error Error
+      const newCart = cart.filter((product) => product.id != id);
       console.log(newCart);
       let totalprice = 0;
-      //@ts-expect-error* Error
-      for (let product of newCart) {
-        //@ts-expect-error* Error
+
+      for (const product of newCart) {
         totalprice += product.price;
       }
       setPrice(totalprice);
@@ -61,9 +61,12 @@ export default function Cart() {
       {cart && (
         <>
           {/*@ts-expect-error* Error*/}
-          {cart.map((product) => {
+          {cart.map((product, index) => {
             return (
-              <div className="rounded-lg mt-5 flex justify-between p-5 text-black bg-gradient-to-br from-pink-200 to-red-100">
+              <div
+                key={index}
+                className="rounded-lg mt-5 flex justify-between p-5 text-black bg-gradient-to-br from-pink-200 to-red-100"
+              >
                 <img src={product.image} className="h-24 w-24 rounded-md " />
                 <h1 className="pl-4 font-bold text-ellipsis">
                   {product.title}
@@ -94,7 +97,7 @@ export default function Cart() {
       {cart == null && (
         <div className="text-center text-2xl mt-5">
           <h1>Your cart is empty&#128560;</h1>
-          <a href="/home">Get back to Shopping</a>
+          <Link href="/home">Get back to Shopping</Link>
         </div>
       )}
     </>

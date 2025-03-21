@@ -10,7 +10,8 @@ export default function SSRF() {
   useEffect(() => {
     fetchInfo();
   }, []);
-  const renderJson = (data: any) => {
+  //@ts-expect-error Error
+  const renderJson = (data) => {
     if (typeof data === "object" && data !== null) {
       return (
         <div style={{ marginLeft: "20px" }}>

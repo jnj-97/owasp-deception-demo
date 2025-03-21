@@ -24,7 +24,7 @@ export default function Account() {
           <div className="flex justify-center items-center">
             <img
               className="rounded-full w-40 h-40 border-2 mt-4 border-white"
-              //@ts-expect-error* Error
+              //@ts-expect-error Error
               src={userInformation.image}
             />
           </div>
