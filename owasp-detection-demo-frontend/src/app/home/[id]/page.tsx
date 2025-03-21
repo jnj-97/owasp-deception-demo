@@ -49,9 +49,8 @@ export default function Login() {
       <Header />
       {Object.keys(product).length && (
         <>
-          {/* @ts-ignore  */}
+          {/* @ts-expect-error Error */}
           <h1 className="m-5 text-3xl text-center">{product.title}</h1>
-          {/* @ts-ignore  */}
           <div className="flex p-5 border-2 border-pink-200">
             <img
               // @ts-ignore
@@ -59,16 +58,16 @@ export default function Login() {
               className="h-1/2 w-1/2 border-10 border-white"
             />
             <div className="pl-5 w-1/3">
-              {/* @ts-ignore  */}
+              {/* @ts-expect-error Error */}
               <RatingReview rating={Math.round(product.rating.rate)} />
-              {/* @ts-ignore  */}
+              {/* @ts-expect-error Error */}
               <h1>{product.rating.count} reviews</h1>
 
               <h1 className="text-green-700 mt-4 text-3xl">
-                {/* @ts-ignore  */}
+                {/* @ts-expect-error Error */}
                 &#36;{product.price}
               </h1>
-              {/* @ts-ignore  */}
+              {/* @ts-expect-error Error */}
               <p>{product.description}</p>
               <button
                 disabled={disabled}
