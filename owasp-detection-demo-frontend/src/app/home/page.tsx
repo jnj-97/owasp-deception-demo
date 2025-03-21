@@ -43,7 +43,7 @@ export default function Home() {
               />
             </div>
             <div className="flex justify-between">
-              {/*@ts-expect-error* Error/}
+              {/*@ts-expect-error* Error*/}
               <RatingReview rating={Math.round(product.rating.rate)} />
               <p className="text-right text-lg pt-2">&#36; {product.price}</p>
             </div>

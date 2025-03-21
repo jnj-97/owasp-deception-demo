@@ -60,7 +60,7 @@ export default function Cart() {
       <h1 className="text-3xl text-center">Cart</h1>
       {cart && (
         <>
-          {/*@ts-expect-error* Error/}
+          {/*@ts-expect-error* Error*/}
           {cart.map((product) => {
             return (
               <div className="rounded-lg mt-5 flex justify-between p-5 text-black bg-gradient-to-br from-pink-200 to-red-100">
