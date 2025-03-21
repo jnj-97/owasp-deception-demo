@@ -11,6 +11,7 @@ CORS(app)
 
 # MongoDB configuration
 MONGO_URI = os.getenv("MONGO_URI")
+print(MONGO_URI)
 DB_NAME = "Requests"
 COLLECTION_NAME = 'request'
 

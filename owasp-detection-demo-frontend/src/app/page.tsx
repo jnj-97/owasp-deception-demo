@@ -48,7 +48,7 @@ export default function Login() {
       const recentClicks = updatedClickTimes.filter(
         (time) => now - time <= 60000
       );
-      //@ts-ignore
+      //@ts-expect-error
       setClickTimes(recentClicks);
       if (recentClicks.length >= 10) {
         await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}`, {

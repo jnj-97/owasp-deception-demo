@@ -8,7 +8,7 @@ export default function Account() {
     fetchUserInformation();
   }, []);
   async function fetchUserInformation() {
-    let randomNumber = Math.floor(Math.random() * 30) + 1;
+    const randomNumber = Math.floor(Math.random() * 30) + 1;
     await fetch(`https://dummyjson.com/users/${randomNumber}`)
       .then((res) => res.json())
       .then((res) => setUserInformation(res));
@@ -24,7 +24,7 @@ export default function Account() {
           <div className="flex justify-center items-center">
             <img
               className="rounded-full w-40 h-40 border-2 mt-4 border-white"
-              //@ts-ignore
+              //@ts-expect-error
               src={userInformation.image}
             />
           </div>

@@ -24,8 +24,8 @@ export default function Login() {
     if (sessionStorage.getItem("cart") == null) {
       setDisabled(false);
     } else {
-      //@ts-ignore
-      let products = JSON.parse(sessionStorage.getItem("cart"));
+      //@ts-expect-error
+      const products = JSON.parse(sessionStorage.getItem("cart"));
       setDisabled(products.some((item: any) => item.id == id));
     }
   }, []);
@@ -35,8 +35,8 @@ export default function Login() {
       sessionStorage.setItem("cart", JSON.stringify([product]));
       setDisabled(true);
     } else {
-      //@ts-ignore
-      let products: any = JSON.parse(sessionStorage.getItem("cart"));
+      //@ts-expect-error
+      const products = JSON.parse(sessionStorage.getItem("cart"));
       console.log({ products });
       products.push(product);
       sessionStorage.setItem("cart", JSON.stringify(products));
