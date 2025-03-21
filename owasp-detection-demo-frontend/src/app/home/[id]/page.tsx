@@ -53,7 +53,7 @@ export default function Login() {
           <h1 className="m-5 text-3xl text-center">{product.title}</h1>
           <div className="flex p-5 border-2 border-pink-200">
             <img
-              // @ts-ignore
+              // @ts-expect-error Error
               src={product.image}
               className="h-1/2 w-1/2 border-10 border-white"
             />
