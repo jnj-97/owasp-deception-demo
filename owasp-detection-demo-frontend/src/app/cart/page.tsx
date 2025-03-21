@@ -18,11 +18,11 @@ export default function Cart() {
   }, []); // This effect only runs once, when the component mounts
 
   useEffect(() => {
-    //@ts-expect-error
+    //@ts-expect-error* Error
 
     if (cart != null && cart.length > 0) {
       let totalPrice = 0;
-      //@ts-expect-error
+      //@ts-expect-error* Error
       cart.forEach((product) => {
         totalPrice += product.price;
       });
@@ -31,18 +31,18 @@ export default function Cart() {
   }, [cart]); // Dependency array ensures this effect runs when cart changes
   function removeProduct(id: number) {
     console.log("id: ", id);
-    //@ts-expect-error
+    //@ts-expect-error* Error
     if (cart.length == 1) {
       sessionStorage.clear();
       setCart(null);
     } else {
-      //@ts-expect-error
+      //@ts-expect-error* Error
       let newCart = cart.filter((product: any) => product.id != id);
       console.log(newCart);
       let totalprice = 0;
-      //@ts-expect-error
+      //@ts-expect-error* Error
       for (let product of newCart) {
-        //@ts-expect-error
+        //@ts-expect-error* Error
         totalprice += product.price;
       }
       setPrice(totalprice);
@@ -60,7 +60,7 @@ export default function Cart() {
       <h1 className="text-3xl text-center">Cart</h1>
       {cart && (
         <>
-          {/*@ts-expect-error*/}
+          {/*@ts-expect-error* Error/}
           {cart.map((product) => {
             return (
               <div className="rounded-lg mt-5 flex justify-between p-5 text-black bg-gradient-to-br from-pink-200 to-red-100">
